@@ -5,17 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ORNIDEX · Terre-Neuve & Labrador</title>
 <!--
-  ============================================================
-  ORNIDEX  ·  hébergement GitHub Pages
-  ------------------------------------------------------------
-  1. Place ce fichier (index.html de préférence) à la racine du dépôt.
+  ORNIDEX · hébergement GitHub Pages
+  1. Place ce fichier (index.html) à la racine du dépôt.
   2. Crée un dossier "images/" à côté.
-  3. Dépose-y une photo par oiseau, avec le nom EXACT indiqué dans
-     le champ "img" de chaque espèce (minuscules, sans accents).
-     Format conseillé : .jpg ou .webp. Si tu changes l'extension,
-     ajuste le champ "img" en conséquence.
-  4. Une photo manquante retombe automatiquement sur la silhouette.
-  ============================================================
+  3. Dépose une photo par oiseau, nom EXACT = champ "img" de l'espèce
+     (voir aussi le fichier images-a-fournir.txt). Format .jpg.
+  4. Photo manquante = un "?" s'affiche automatiquement.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,33 +19,26 @@
   :root{
     --sea:#0c1a22; --sea2:#102530; --fog:#dfe5e2; --fog-dim:#9fb0ad;
     --granite:#1a2b33; --granite2:#22383f; --line:#2e4750;
-    --puffin:#ff7a3c; --puffin-deep:#e85d20; --lichen:#9fc14b; --gold:#ffd34d;
+    --puffin:#ff7a3c; --lichen:#9fc14b; --gold:#ffd34d;
     --shiny1:#5ce0ff; --shiny2:#c77dff; --shiny3:#ffe45c; --ink:#04090c;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
   html,body{background:var(--sea);color:var(--fog);font-family:'Spline Sans',sans-serif;}
-  body{
-    background:radial-gradient(120% 80% at 50% -10%, #16323d 0%, var(--sea) 55%), var(--sea);
-    background-attachment:fixed;min-height:100vh;padding:0 0 90px;overflow-x:hidden;
-  }
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;opacity:.06;z-index:0;
-    background-image:
-      repeating-linear-gradient(0deg, transparent 0 38px, #6fb3c4 38px 39px),
+  body{background:radial-gradient(120% 80% at 50% -10%, #16323d 0%, var(--sea) 55%), var(--sea);
+    background-attachment:fixed;min-height:100vh;padding:0 0 90px;overflow-x:hidden;}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.06;z-index:0;
+    background-image:repeating-linear-gradient(0deg, transparent 0 38px, #6fb3c4 38px 39px),
       repeating-linear-gradient(90deg, transparent 0 38px, #6fb3c4 38px 39px);
-    mask:radial-gradient(110% 90% at 50% 0%, #000 30%, transparent 80%);
-  }
+    mask:radial-gradient(110% 90% at 50% 0%, #000 30%, transparent 80%);}
 
-  /* ---------- HEADER ---------- */
   header{position:relative;z-index:2;padding:26px 18px 18px;text-align:center;}
-  .crest{display:inline-flex;align-items:center;gap:9px;font-family:'DM Mono',monospace;
-    font-size:11px;letter-spacing:.32em;color:var(--puffin);text-transform:uppercase;margin-bottom:6px;}
+  .crest{display:inline-flex;align-items:center;gap:9px;font-family:'DM Mono',monospace;font-size:11px;
+    letter-spacing:.32em;color:var(--puffin);text-transform:uppercase;margin-bottom:6px;}
   .crest .dot{width:9px;height:9px;border-radius:50%;background:var(--puffin);box-shadow:0 0 12px var(--puffin);}
   h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(34px,9vw,56px);line-height:.92;letter-spacing:-.02em;color:var(--fog);}
   h1 em{font-style:italic;font-weight:500;color:var(--lichen);}
-  .sub{margin-top:10px;color:var(--fog-dim);font-size:13.5px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.5;}
+  .sub{margin-top:10px;color:var(--fog-dim);font-size:13.5px;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.5;}
 
-  /* ---------- PROGRESS ---------- */
   .progress-wrap{max-width:560px;margin:20px auto 0;padding:0 18px;position:relative;z-index:2;}
   .stats{display:flex;gap:10px;}
   .stat{flex:1;background:linear-gradient(180deg,var(--granite2),var(--granite));border:1px solid var(--line);
@@ -64,7 +52,6 @@
   .bar{height:6px;border-radius:6px;background:#0a1418;margin-top:12px;overflow:hidden;border:1px solid var(--line);}
   .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--lichen),var(--puffin));transition:width .6s cubic-bezier(.2,.8,.2,1);}
 
-  /* ---------- CONTROLS ---------- */
   .controls{max-width:560px;margin:18px auto 0;padding:0 18px;position:relative;z-index:2;}
   .search{width:100%;background:var(--granite);border:1px solid var(--line);border-radius:14px;
     padding:13px 16px;color:var(--fog);font-size:15px;font-family:'Spline Sans';outline:none;}
@@ -77,56 +64,50 @@
   .chip.active{background:var(--fog);color:var(--ink);border-color:var(--fog);}
   .chip.shiny.active{background:linear-gradient(90deg,var(--shiny1),var(--shiny2));color:var(--ink);border:none;}
 
-  /* ---------- GRID ---------- */
   .grid{max-width:920px;margin:8px auto 0;padding:8px 14px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;position:relative;z-index:2;}
   @media(min-width:620px){.grid{grid-template-columns:repeat(3,1fr);gap:14px;padding:8px 18px;}}
   @media(min-width:860px){.grid{grid-template-columns:repeat(4,1fr);}}
 
   .card{background:linear-gradient(180deg,var(--granite2),var(--granite));border:1px solid var(--line);
     border-radius:18px;padding:12px 12px 14px;cursor:pointer;position:relative;overflow:hidden;
-    transition:transform .15s ease, border-color .2s, box-shadow .2s;
-    opacity:0;transform:translateY(14px);animation:rise .5s forwards;}
+    transition:transform .15s ease, border-color .2s, box-shadow .2s;opacity:0;transform:translateY(14px);animation:rise .5s forwards;}
   .card:active{transform:scale(.97);}
   @media(hover:hover){.card:hover{border-color:var(--fog-dim);transform:translateY(-3px);}}
   .card.seen{box-shadow:0 0 0 1px rgba(159,193,75,.25);}
   .card.shiny{border-color:transparent;background:
     linear-gradient(180deg,#1b2530,#14202a) padding-box,
-    linear-gradient(125deg,var(--shiny1),var(--shiny2),var(--shiny3)) border-box;
-    border:1.5px solid transparent;}
+    linear-gradient(125deg,var(--shiny1),var(--shiny2),var(--shiny3)) border-box;border:1.5px solid transparent;}
   .card .dexno{position:absolute;top:10px;left:13px;font-family:'DM Mono',monospace;font-size:10px;
-    color:#fff;letter-spacing:.05em;z-index:5;text-shadow:0 1px 4px rgba(0,0,0,.8);}
+    color:#fff;letter-spacing:.05em;z-index:6;text-shadow:0 1px 4px rgba(0,0,0,.8);}
   .seen-dot{position:absolute;top:10px;right:11px;width:18px;height:18px;border-radius:50%;
-    border:1.5px solid rgba(255,255,255,.6);z-index:5;transition:.2s;background:rgba(0,0,0,.35);}
+    border:1.5px solid rgba(255,255,255,.6);z-index:6;transition:.2s;background:rgba(0,0,0,.35);}
   .card.seen .seen-dot{background:var(--lichen);border-color:var(--lichen);box-shadow:0 0 10px rgba(159,193,75,.6);}
   .card.seen .seen-dot::after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;font-size:11px;color:var(--ink);font-weight:700;}
 
   .sprite{width:100%;aspect-ratio:1;border-radius:14px;position:relative;overflow:hidden;
     display:grid;place-items:center;margin:0 0 10px;background:radial-gradient(120% 120% at 30% 20%, #1f343d, #0c171d);}
   .sprite .contours{position:absolute;inset:0;opacity:.45;z-index:1;}
-  .sprite .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;transition:filter .3s;}
-  .sprite svg.bird{width:74%;height:74%;position:relative;z-index:2;filter:drop-shadow(0 6px 10px rgba(0,0,0,.45));}
-  /* not-yet-caught = légèrement désaturé (mais identifiable) */
-  .card:not(.seen) .sprite .photo{filter:saturate(.5) brightness(.82);}
-  .card:not(.seen) .sprite svg.bird{filter:saturate(.5) brightness(.82) drop-shadow(0 6px 10px rgba(0,0,0,.45));}
+  .sprite .qmark{position:absolute;inset:0;display:grid;place-items:center;z-index:2;
+    font-family:'Fraunces',serif;font-weight:900;font-size:52px;color:#415661;}
+  .sprite .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:3;transition:filter .3s;}
+  .card:not(.seen) .sprite .photo,.card:not(.seen) .sprite .qmark{filter:saturate(.5) brightness(.82);}
   .card:not(.seen) .sprite .holo{display:none;}
-
-  .sprite .holo{position:absolute;inset:0;z-index:3;pointer-events:none;mix-blend-mode:screen;
+  .sprite .holo{position:absolute;inset:0;z-index:4;pointer-events:none;mix-blend-mode:screen;
     background:linear-gradient(125deg,transparent 35%,rgba(92,224,255,.45) 47%,rgba(199,125,255,.45) 53%,transparent 65%);
     background-size:300% 300%;animation:holo 3.5s ease-in-out infinite;}
-  .spark{position:absolute;z-index:4;font-size:13px;color:#fff;opacity:0;filter:drop-shadow(0 0 6px var(--shiny1));}
+  .spark{position:absolute;z-index:5;font-size:13px;color:#fff;opacity:0;filter:drop-shadow(0 0 6px var(--shiny1));}
   .card.shiny.seen .spark{animation:spark 2.6s ease-in-out infinite;}
   .spark.s1{top:10%;left:14%;animation-delay:0s;}
   .spark.s2{top:64%;right:12%;animation-delay:.9s;}
   .spark.s3{top:30%;right:20%;animation-delay:1.7s;}
 
-  .nameFr{font-family:'Fraunces',serif;font-weight:600;font-size:15.5px;line-height:1.08;color:var(--fog);}
+  .nameFr{font-family:'Fraunces',serif;font-weight:600;font-size:15px;line-height:1.08;color:var(--fog);}
   .nameEn{font-size:11px;color:var(--fog-dim);margin-top:3px;}
   .tagrow{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
-  .tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;
+  .tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.04em;text-transform:uppercase;
     padding:3px 7px;border-radius:6px;background:#0c1a20;border:1px solid var(--line);color:var(--fog-dim);}
   .tag.rare{color:var(--gold);border-color:#5a4a1c;background:#241d09;}
 
-  /* ---------- MODAL ---------- */
   .overlay{position:fixed;inset:0;z-index:50;background:rgba(4,9,12,.72);backdrop-filter:blur(7px);
     display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:.25s;}
   @media(min-width:620px){.overlay{align-items:center;}}
@@ -144,16 +125,15 @@
   .hero{position:relative;padding:14px 22px 4px;text-align:center;}
   .hero .bigsprite{width:200px;height:200px;margin:4px auto;border-radius:24px;position:relative;overflow:hidden;
     background:radial-gradient(120% 120% at 30% 20%, #213842, #0a151b);display:grid;place-items:center;}
-  .hero .bigsprite .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;}
-  .hero .bigsprite svg.bird{width:76%;height:76%;filter:drop-shadow(0 8px 14px rgba(0,0,0,.5));z-index:2;}
+  .hero .bigsprite .contours{position:absolute;inset:0;opacity:.45;z-index:1;}
+  .hero .bigsprite .qmark{position:absolute;inset:0;display:grid;place-items:center;z-index:2;font-family:'Fraunces',serif;font-weight:900;font-size:88px;color:#415661;}
+  .hero .bigsprite .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:3;}
   .hero .dexbig{font-family:'DM Mono';font-size:12px;color:var(--puffin);letter-spacing:.2em;}
-  .hero h2{font-family:'Fraunces',serif;font-weight:900;font-size:30px;line-height:1;margin-top:8px;}
+  .hero h2{font-family:'Fraunces',serif;font-weight:900;font-size:28px;line-height:1.02;margin-top:8px;}
   .hero .en{color:var(--fog-dim);margin-top:5px;font-size:14px;}
-  .hero .sci{font-style:italic;color:var(--lichen);font-size:13px;margin-top:2px;font-family:'Fraunces';}
   .shinybadge{display:inline-block;margin-top:10px;font-family:'DM Mono';font-size:11px;letter-spacing:.2em;
     padding:5px 13px;border-radius:999px;color:var(--ink);background:linear-gradient(90deg,var(--shiny1),var(--shiny2),var(--shiny3));font-weight:500;}
   .body{padding:6px 22px 0;}
-  .blurb{font-size:15px;line-height:1.55;color:#cdd9d6;margin:14px 0 4px;}
   .factgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px;}
   .fact{background:#0c1820;border:1px solid var(--line);border-radius:13px;padding:11px 13px;}
   .fact .k{font-family:'DM Mono';font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--fog-dim);}
@@ -179,7 +159,7 @@
 <header>
   <div class="crest"><span class="dot"></span>Carnet de route &middot; édition Atlantique<span class="dot"></span></div>
   <h1>ORNI<em>dex</em></h1>
-  <p class="sub">Les oiseaux de Terre-Neuve &amp; du Labrador. Touchez une espèce que vous croisez pour l'attraper. Les <strong style="color:var(--gold)">shiny</strong> sont les prises rares et légendaires.</p>
+  <p class="sub">La liste des oiseaux recensés à Terre-Neuve-et-Labrador. Touchez une espèce croisée pour l'attraper. Les espèces rares (peu de mentions dans la région) apparaissent en <strong style="color:var(--gold)">shiny</strong>.</p>
 </header>
 
 <div class="progress-wrap">
@@ -191,400 +171,145 @@
 </div>
 
 <div class="controls">
-  <input class="search" id="search" placeholder="Rechercher (macareux, fou, gull…)">
+  <input class="search" id="search" placeholder="Rechercher (macareux, paruline, gull…)">
   <div class="chips" id="chips"></div>
 </div>
 
 <div class="grid" id="grid"></div>
 
 <div class="foot">
-  <p class="legend">Photo désaturée = pas encore cochée &middot; couleurs pleines une fois attrapée.<br>Progression sauvegardée automatiquement sur cet appareil.</p>
+  <p class="legend">Photo absente ? Un « ? » s'affiche en attendant. &middot; Vignette désaturée tant que l'espèce n'est pas cochée.<br>Progression sauvegardée automatiquement sur cet appareil.</p>
   <button class="reset" id="reset">Réinitialiser ma progression</button>
 </div>
 
 <div class="overlay" id="overlay"><div class="sheet" id="sheet"></div></div>
 
 <script>
-/* ============================ DONNÉES ============================ */
-/* img : nom de fichier à placer dans le dossier images/ */
-const BIRDS = [
- // ---------- COMMUNS ----------
- {id:1,fr:"Macareux moine",en:"Atlantic Puffin",sci:"Fratercula arctica",type:"alcid",rare:false,img:"images/001-macareux-moine.jpg",
-  pal:["#1b1b1b","#f2f2f2","#ff7a3c"],region:"Mer & falaises",hab:"Colonies des îles",
-  blurb:"L'oiseau emblème officiel de la province. Son bec multicolore est éclatant l'été puis tombe en hiver. La réserve de Witless Bay abrite la plus grande colonie d'Amérique du Nord.",
-  size:"28 cm",seen:"Witless Bay, Elliston",astuce:"Juin à août, en mer ou depuis les falaises"},
- {id:2,fr:"Fou de Bassan",en:"Northern Gannet",sci:"Morus bassanus",type:"seabird",rare:false,img:"images/002-fou-de-bassan.jpg",
-  pal:["#f6f4ee","#0d1d24","#e0c044"],region:"Mer & falaises",hab:"Falaises de nidification",
-  blurb:"Un plongeon vertical à 100 km/h pour pêcher. À Cap Sainte-Marie, des dizaines de milliers nichent sur un seul piton rocheux, à quelques mètres du sentier.",
-  size:"Env. 1,8 m d'envergure",seen:"Cap Sainte-Marie",astuce:"Bird Rock, observation garantie"},
- {id:3,fr:"Mouette tridactyle",en:"Black-legged Kittiwake",sci:"Rissa tridactyla",type:"gull",rare:false,img:"images/003-mouette-tridactyle.jpg",
-  pal:["#f4f6f7","#9aa7ab","#1a2a30"],region:"Mer & falaises",hab:"Falaises maritimes",
-  blurb:"La vraie mouette océanique : pattes noires, ailes au bout « trempé dans l'encre ». Son cri répété donne son nom anglais. Niche en pleine paroi.",
-  size:"40 cm",seen:"Toutes les colonies",astuce:"Souvent mêlée aux fous et macareux"},
- {id:4,fr:"Guillemot marmette",en:"Common Murre",sci:"Uria aalge",type:"alcid",rare:false,img:"images/004-guillemot-marmette.jpg",
-  pal:["#2b2b2b","#ededed","#5a5a5a"],region:"Mer & falaises",hab:"Corniches rocheuses",
-  blurb:"Le « pingouin » de l'Atlantique : il « vole » sous l'eau pour chasser. Niche serré, sans nid, sur des corniches nues. Œuf en forme de poire pour ne pas rouler.",
-  size:"40 cm",seen:"Funk Island, colonies",astuce:"En radeaux denses sur l'eau"},
- {id:5,fr:"Petit Pingouin",en:"Razorbill",sci:"Alca torda",type:"alcid",rare:false,img:"images/005-petit-pingouin.jpg",
-  pal:["#1c1c1c","#f0f0f0","#3a3a3a"],region:"Mer & falaises",hab:"Anfractuosités de falaise",
-  blurb:"Plus proche parent vivant du grand pingouin disparu. Bec noir épais barré d'une ligne blanche. Élégant et trapu.",
-  size:"43 cm",seen:"Colonies marines",astuce:"Repérez la ligne blanche du bec"},
- {id:6,fr:"Guillemot à miroir",en:"Black Guillemot",sci:"Cepphus grylle",type:"alcid",rare:false,img:"images/006-guillemot-a-miroir.jpg",
-  pal:["#141414","#ffffff","#d23b2e"],region:"Côtes & baies",hab:"Côtes rocheuses",
-  blurb:"Tout noir avec une grosse tache blanche à l'aile et, surprise, des pattes rouge vif et l'intérieur du bec écarlate. Plus discret, en couples.",
-  size:"32 cm",seen:"Quais et anses",astuce:"Cherchez les pattes rouges"},
- {id:7,fr:"Fulmar boréal",en:"Northern Fulmar",sci:"Fulmarus glacialis",type:"seabird",rare:false,img:"images/007-fulmar-boreal.jpg",
-  pal:["#eef0f1","#b9c4c8","#8a979b"],region:"Mer & falaises",hab:"Haute mer & falaises",
-  blurb:"Ressemble à un goéland mais c'est un cousin des albatros : vol raide en planeur, narines tubulaires. Crache une huile nauséabonde pour se défendre.",
-  size:"47 cm",seen:"Au large, falaises",astuce:"Vol rigide, ailes raides"},
- {id:8,fr:"Océanite cul-blanc",en:"Leach's Storm-Petrel",sci:"Hydrobates leucorhous",type:"seabird",rare:false,img:"images/008-oceanite-cul-blanc.jpg",
-  pal:["#23262a","#3a3f44","#dcdfe1"],region:"Mer & falaises",hab:"Terriers nocturnes",
-  blurb:"Minuscule oiseau de tempête. Baccalieu Island en accueille des millions, parmi les plus grandes colonies au monde. Ne rentre au nid que la nuit.",
-  size:"20 cm",seen:"Baccalieu Island",astuce:"Nocturne, surtout en mer"},
- {id:9,fr:"Eider à duvet",en:"Common Eider",sci:"Somateria mollissima",type:"duck",rare:false,img:"images/009-eider-a-duvet.jpg",
-  pal:["#f2f2f0","#0e0e0e","#a9c6cf"],region:"Côtes & baies",hab:"Côtes et îlots",
-  blurb:"Le plus gros canard de l'hémisphère nord. Le mâle noir et blanc lance un « ah-OOH » doux et étonné. Son duvet est légendairement chaud.",
-  size:"60 cm",seen:"Baies abritées",astuce:"Radeaux le long des côtes"},
- {id:10,fr:"Plongeon huard",en:"Common Loon",sci:"Gavia immer",type:"duck",rare:false,img:"images/010-plongeon-huard.jpg",
-  pal:["#101316","#f4f4f4","#2a3338"],region:"Forêt boréale",hab:"Lacs intérieurs",
-  blurb:"Son cri tremblé est la voix du Nord. Damier noir et blanc, yeux rouges. Plongeur d'exception, presque incapable de marcher au sol.",
-  size:"80 cm",seen:"Lacs et étangs",astuce:"Écoutez au crépuscule"},
- {id:11,fr:"Pygargue à tête blanche",en:"Bald Eagle",sci:"Haliaeetus leucocephalus",type:"raptor",rare:false,img:"images/011-pygargue-a-tete-blanche.jpg",
-  pal:["#3a2a1c","#f5f5f5","#ffc23a"],region:"Côtes & baies",hab:"Côtes et grands lacs",
-  blurb:"Terre-Neuve en abrite l'une des plus fortes densités de l'est du continent. Tête et queue blanches chez l'adulte, bec jaune massif.",
-  size:"2 m d'envergure",seen:"Littoral, ports de pêche",astuce:"Perché sur les épinettes mortes"},
- {id:12,fr:"Balbuzard pêcheur",en:"Osprey",sci:"Pandion haliaetus",type:"raptor",rare:false,img:"images/012-balbuzard-pecheur.jpg",
-  pal:["#4a3826","#f2f2f2","#3a3a3a"],region:"Côtes & baies",hab:"Plans d'eau poissonneux",
-  blurb:"Le rapace pêcheur. Plonge serres en avant pour saisir le poisson, qu'il oriente tête vers l'avant en vol. Gros nid de branches sur poteau ou arbre mort.",
-  size:"1,6 m d'envergure",seen:"Rivières, estuaires",astuce:"Plane en battant sur place"},
- {id:13,fr:"Mésangeai du Canada",en:"Canada Jay",sci:"Perisoreus canadensis",type:"songbird",rare:false,img:"images/013-mesangeai-du-canada.jpg",
-  pal:["#6b7378","#f0f0ee","#2b3338"],region:"Forêt boréale",hab:"Forêt d'épinettes",
-  blurb:"Le « whisky-jack » curieux et sans peur, qui vient parfois manger dans la main. Stocke des milliers de provisions collées sous l'écorce pour l'hiver.",
-  size:"29 cm",seen:"Sentiers boréals",astuce:"S'approche tout seul aux haltes"},
- {id:14,fr:"Mésange à tête brune",en:"Boreal Chickadee",sci:"Poecile hudsonicus",type:"songbird",rare:false,img:"images/014-mesange-a-tete-brune.jpg",
-  pal:["#7a6450","#efe7da","#9a7a55"],region:"Forêt boréale",hab:"Conifères du Nord",
-  blurb:"La mésange du grand Nord, calotte brune et flancs cannelle. Voix plus nasillarde et traînante que sa cousine à tête noire.",
-  size:"14 cm",seen:"Forêts d'épinettes",astuce:"En petites bandes actives"},
- {id:15,fr:"Merle d'Amérique",en:"American Robin",sci:"Turdus migratorius",type:"songbird",rare:false,img:"images/015-merle-d-amerique.jpg",
-  pal:["#3a3a3c","#d6622e","#e9e4dc"],region:"Partout",hab:"Lisières, villages",
-  blurb:"Poitrine orange brique, chant flûté à l'aube. Familier mais toujours élégant, il sautille sur les pelouses à la recherche de vers.",
-  size:"25 cm",seen:"Partout, villages",astuce:"Le plus facile à cocher"},
- {id:16,fr:"Bruant à gorge blanche",en:"White-throated Sparrow",sci:"Zonotrichia albicollis",type:"songbird",rare:false,img:"images/016-bruant-a-gorge-blanche.jpg",
-  pal:["#6a5a44","#f4f4f2","#e0c33a"],region:"Forêt boréale",hab:"Sous-bois, broussailles",
-  blurb:"Son chant clair « ô doux Canada-Canada » est la trame sonore de la forêt boréale en été. Gorge blanche nette et point jaune devant l'œil.",
-  size:"17 cm",seen:"Lisières forestières",astuce:"On l'entend partout l'été"},
- {id:17,fr:"Junco ardoisé",en:"Dark-eyed Junco",sci:"Junco hyemalis",type:"songbird",rare:false,img:"images/017-junco-ardoise.jpg",
-  pal:["#454c52","#f2f2f2","#d9b8a0"],region:"Forêt boréale",hab:"Sol forestier, mangeoires",
-  blurb:"Petit bruant ardoise au ventre blanc net, montrant des plumes externes blanches en s'envolant. Bec rose pâle. Trille sec et régulier.",
-  size:"15 cm",seen:"Bords de sentiers",astuce:"Flashs blancs à l'envol"},
- {id:18,fr:"Bruant fauve",en:"Fox Sparrow",sci:"Passerella iliaca",type:"songbird",rare:false,img:"images/018-bruant-fauve.jpg",
-  pal:["#8a4a32","#e8ded2","#5a3a28"],region:"Forêt boréale",hab:"Fourrés humides",
-  blurb:"Gros bruant roux flamboyant. La sous-espèce de Terre-Neuve est particulièrement sombre. Gratte le sol des deux pattes à la fois, façon poule.",
-  size:"18 cm",seen:"Fourrés côtiers",astuce:"Chant riche et sifflé"},
- {id:19,fr:"Lagopède des saules",en:"Willow Ptarmigan",sci:"Lagopus lagopus",type:"gamebird",rare:false,img:"images/019-lagopede-des-saules.jpg",
-  pal:["#a05a32","#f4f4f4","#3a2a1c"],region:"Toundra & barrens",hab:"Landes et barrens",
-  blurb:"Le caméléon des landes : roux l'été, blanc immaculé l'hiver, pattes emplumées comme des raquettes. Mâle au cri rauque de grenouille mécanique.",
-  size:"38 cm",seen:"Barrens, Labrador",astuce:"Explose presque sous les pieds"},
- {id:20,fr:"Tétras du Canada",en:"Spruce Grouse",sci:"Falcipennis canadensis",type:"gamebird",rare:false,img:"images/020-tetras-du-canada.jpg",
-  pal:["#2e2e2e","#8a2a2a","#d9cdb8"],region:"Forêt boréale",hab:"Pinèdes et épinettes",
-  blurb:"Surnommé « fool hen » tant il est confiant : il reste perché à vous fixer. Mâle noir à arcades rouge vif au-dessus de l'œil.",
-  size:"40 cm",seen:"Pistes forestières",astuce:"Souvent au sol, immobile"},
- {id:21,fr:"Sizerin flammé",en:"Common Redpoll",sci:"Acanthis flammea",type:"songbird",rare:false,img:"images/021-sizerin-flamme.jpg",
-  pal:["#9aa0a4","#d23b3b","#f2efe9"],region:"Forêt boréale",hab:"Bouleaux, mangeoires",
-  blurb:"Minuscule fringille au front rouge framboise et au menton noir. Arrive du Nord en bandes nomades, surtout les hivers d'invasion.",
-  size:"13 cm",seen:"Bosquets de bouleaux",astuce:"Bandes acrobatiques en hiver"},
- {id:22,fr:"Durbec des sapins",en:"Pine Grosbeak",sci:"Pinicola enucleator",type:"songbird",rare:false,img:"images/022-durbec-des-sapins.jpg",
-  pal:["#b54a4a","#9aa0a4","#e0d8cc"],region:"Forêt boréale",hab:"Conifères, sorbiers",
-  blurb:"Le plus gros des fringilles boréals, lent et placide. Mâle rouge framboise délavé, gros bec arrondi. Adore les fruits de sorbier.",
-  size:"23 cm",seen:"Sorbiers en hiver",astuce:"Très peu farouche"},
- {id:23,fr:"Bec-croisé bifascié",en:"White-winged Crossbill",sci:"Loxia leucoptera",type:"songbird",rare:false,img:"images/023-bec-croise-bifascie.jpg",
-  pal:["#c25a3a","#1a1a1a","#f2f2f2"],region:"Forêt boréale",hab:"Cônes d'épinettes",
-  blurb:"Mandibules croisées, outil parfait pour ouvrir les cônes. Deux barres alaires blanches nettes. Nomade : suit les bonnes années à cônes.",
-  size:"15 cm",seen:"Cimes d'épinettes",astuce:"Cliquetis en vol au-dessus"},
- {id:24,fr:"Goéland argenté",en:"Herring Gull",sci:"Larus argentatus",type:"gull",rare:false,img:"images/024-goeland-argente.jpg",
-  pal:["#f4f6f7","#9aa7ab","#e0a83a"],region:"Partout",hab:"Ports, dépotoirs, côtes",
-  blurb:"Le grand goéland classique, dos gris, point rouge sous le bec jaune. Omniprésent autour des quais. La base à partir de laquelle repérer les raretés.",
-  size:"60 cm",seen:"Tous les ports",astuce:"Le repère pour trier les rares"},
+const BIRDS = [{"id": 1,"fr": "Bernache du Canada","en": "Canada Goose","count": 166,"group": "Sauvagine","img": "images/001-bernache-du-canada.jpg"},{"id": 2,"fr": "Canard branchu","en": "Wood Duck","count": 10,"group": "Sauvagine","img": "images/002-canard-branchu.jpg"},{"id": 3,"fr": "Sarcelle à ailes bleues","en": "Blue-winged Teal","count": 10,"group": "Sauvagine","img": "images/003-sarcelle-a-ailes-bleues.jpg"},{"id": 4,"fr": "Canard souchet","en": "Northern Shoveler","count": 9,"group": "Sauvagine","img": "images/004-canard-souchet.jpg"},{"id": 5,"fr": "Canard chipeau","en": "Gadwall","count": 3,"group": "Sauvagine","img": "images/005-canard-chipeau.jpg"},{"id": 6,"fr": "Canard siffleur","en": "Eurasian Wigeon","count": 2,"group": "Sauvagine","img": "images/006-canard-siffleur.jpg"},{"id": 7,"fr": "Canard d'Amérique","en": "American Wigeon","count": 34,"group": "Sauvagine","img": "images/007-canard-d-amerique.jpg"},{"id": 8,"fr": "Canard colvert","en": "Mallard","count": 70,"group": "Sauvagine","img": "images/008-canard-colvert.jpg"},{"id": 9,"fr": "Canard noir","en": "American Black Duck","count": 238,"group": "Sauvagine","img": "images/009-canard-noir.jpg"},{"id": 10,"fr": "Canard pilet","en": "Northern Pintail","count": 49,"group": "Sauvagine","img": "images/010-canard-pilet.jpg"},{"id": 11,"fr": "Sarcelle d'hiver","en": "Green-winged Teal","count": 118,"group": "Sauvagine","img": "images/011-sarcelle-d-hiver.jpg"},{"id": 12,"fr": "Fuligule à collier","en": "Ring-necked Duck","count": 179,"group": "Sauvagine","img": "images/012-fuligule-a-collier.jpg"},{"id": 13,"fr": "Fuligule morillon","en": "Tufted Duck","count": 1,"group": "Sauvagine","img": "images/013-fuligule-morillon.jpg"},{"id": 14,"fr": "Fuligule milouinan","en": "Greater Scaup","count": 31,"group": "Sauvagine","img": "images/014-fuligule-milouinan.jpg"},{"id": 15,"fr": "Eider à duvet","en": "Common Eider","count": 36,"group": "Sauvagine","img": "images/015-eider-a-duvet.jpg"},{"id": 16,"fr": "Arlequin plongeur","en": "Harlequin Duck","count": 8,"group": "Sauvagine","img": "images/016-arlequin-plongeur.jpg"},{"id": 17,"fr": "Macreuse à front blanc","en": "Surf Scoter","count": 5,"group": "Sauvagine","img": "images/017-macreuse-a-front-blanc.jpg"},{"id": 18,"fr": "Macreuse à ailes blanches","en": "White-winged Scoter","count": 2,"group": "Sauvagine","img": "images/018-macreuse-a-ailes-blanches.jpg"},{"id": 19,"fr": "Macreuse à bec jaune","en": "Black Scoter","count": 8,"group": "Sauvagine","img": "images/019-macreuse-a-bec-jaune.jpg"},{"id": 20,"fr": "Harelde kakawi","en": "Long-tailed Duck","count": 3,"group": "Sauvagine","img": "images/020-harelde-kakawi.jpg"},{"id": 21,"fr": "Garrot à œil d'or","en": "Common Goldeneye","count": 68,"group": "Sauvagine","img": "images/021-garrot-a-oeil-d-or.jpg"},{"id": 22,"fr": "Garrot d'Islande","en": "Barrow's Goldeneye","count": 3,"group": "Sauvagine","img": "images/022-garrot-d-islande.jpg"},{"id": 23,"fr": "Harle couronné","en": "Hooded Merganser","count": 5,"group": "Sauvagine","img": "images/023-harle-couronne.jpg"},{"id": 24,"fr": "Grand Harle","en": "Common Merganser","count": 72,"group": "Sauvagine","img": "images/024-grand-harle.jpg"},{"id": 25,"fr": "Harle huppé","en": "Red-breasted Merganser","count": 91,"group": "Sauvagine","img": "images/025-harle-huppe.jpg"},{"id": 26,"fr": "Gélinotte huppée","en": "Ruffed Grouse","count": 215,"group": "Tétras et lagopèdes","img": "images/026-gelinotte-huppee.jpg"},{"id": 27,"fr": "Lagopède des saules","en": "Willow Ptarmigan","count": 39,"group": "Tétras et lagopèdes","img": "images/027-lagopede-des-saules.jpg"},{"id": 28,"fr": "Lagopède alpin","en": "Rock Ptarmigan","count": 24,"group": "Tétras et lagopèdes","img": "images/028-lagopede-alpin.jpg"},{"id": 29,"fr": "Tétras du Canada","en": "Spruce Grouse","count": 134,"group": "Tétras et lagopèdes","img": "images/029-tetras-du-canada.jpg"},{"id": 30,"fr": "Pigeon biset (forme domestique)","en": "Rock Pigeon","count": 44,"group": "Pigeons et colibri","img": "images/030-pigeon-biset-forme-domestique.jpg"},{"id": 31,"fr": "Tourterelle triste","en": "Mourning Dove","count": 38,"group": "Pigeons et colibri","img": "images/031-tourterelle-triste.jpg"},{"id": 32,"fr": "Colibri à gorge rubis","en": "Ruby-throated Hummingbird","count": 5,"group": "Pigeons et colibri","img": "images/032-colibri-a-gorge-rubis.jpg"},{"id": 33,"fr": "Marouette de Caroline","en": "Sora","count": 6,"group": "Limicoles et râles","img": "images/033-marouette-de-caroline.jpg"},{"id": 34,"fr": "Foulque d'Amérique","en": "American Coot","count": 2,"group": "Limicoles et râles","img": "images/034-foulque-d-amerique.jpg"},{"id": 35,"fr": "Pluvier bronzé","en": "American Golden-Plover","count": 1,"group": "Limicoles et râles","img": "images/035-pluvier-bronze.jpg"},{"id": 36,"fr": "Pluvier kildir","en": "Killdeer","count": 19,"group": "Limicoles et râles","img": "images/036-pluvier-kildir.jpg"},{"id": 37,"fr": "Pluvier semipalmé","en": "Semipalmated Plover","count": 21,"group": "Limicoles et râles","img": "images/037-pluvier-semipalme.jpg"},{"id": 38,"fr": "Pluvier siffleur","en": "Piping Plover","count": 10,"group": "Limicoles et râles","img": "images/038-pluvier-siffleur.jpg"},{"id": 39,"fr": "Courlis hudsonien","en": "Hudsonian Whimbrel","count": 1,"group": "Limicoles et râles","img": "images/039-courlis-hudsonien.jpg"},{"id": 40,"fr": "Bécasse d'Amérique","en": "American Woodcock","count": 13,"group": "Limicoles et râles","img": "images/040-becasse-d-amerique.jpg"},{"id": 41,"fr": "Bécassine de Wilson","en": "Wilson's Snipe","count": 494,"group": "Limicoles et râles","img": "images/041-becassine-de-wilson.jpg"},{"id": 42,"fr": "Chevalier grivelé","en": "Spotted Sandpiper","count": 397,"group": "Limicoles et râles","img": "images/042-chevalier-grivele.jpg"},{"id": 43,"fr": "Chevalier solitaire","en": "Solitary Sandpiper","count": 3,"group": "Limicoles et râles","img": "images/043-chevalier-solitaire.jpg"},{"id": 44,"fr": "Petit Chevalier","en": "Lesser Yellowlegs","count": 3,"group": "Limicoles et râles","img": "images/044-petit-chevalier.jpg"},{"id": 45,"fr": "Chevalier semipalmé","en": "Willet","count": 6,"group": "Limicoles et râles","img": "images/045-chevalier-semipalme.jpg"},{"id": 46,"fr": "Grand Chevalier","en": "Greater Yellowlegs","count": 405,"group": "Limicoles et râles","img": "images/046-grand-chevalier.jpg"},{"id": 47,"fr": "Tournepierre à collier","en": "Ruddy Turnstone","count": 1,"group": "Limicoles et râles","img": "images/047-tournepierre-a-collier.jpg"},{"id": 48,"fr": "Bécasseau à croupion blanc","en": "White-rumped Sandpiper","count": 1,"group": "Limicoles et râles","img": "images/048-becasseau-a-croupion-blanc.jpg"},{"id": 49,"fr": "Bécasseau minuscule","en": "Least Sandpiper","count": 32,"group": "Limicoles et râles","img": "images/049-becasseau-minuscule.jpg"},{"id": 50,"fr": "Bécasseau semipalmé","en": "Semipalmated Sandpiper","count": 3,"group": "Limicoles et râles","img": "images/050-becasseau-semipalme.jpg"},{"id": 51,"fr": "Macareux moine","en": "Atlantic Puffin","count": 13,"group": "Oiseaux marins","img": "images/051-macareux-moine.jpg"},{"id": 52,"fr": "Guillemot à miroir","en": "Black Guillemot","count": 73,"group": "Oiseaux marins","img": "images/052-guillemot-a-miroir.jpg"},{"id": 53,"fr": "Petit Pingouin","en": "Razorbill","count": 13,"group": "Oiseaux marins","img": "images/053-petit-pingouin.jpg"},{"id": 54,"fr": "Guillemot de Brünnich","en": "Thick-billed Murre","count": 8,"group": "Oiseaux marins","img": "images/054-guillemot-de-brunnich.jpg"},{"id": 55,"fr": "Guillemot marmette","en": "Common Murre","count": 12,"group": "Oiseaux marins","img": "images/055-guillemot-marmette.jpg"},{"id": 56,"fr": "Mouette tridactyle","en": "Black-legged Kittiwake","count": 33,"group": "Oiseaux marins","img": "images/056-mouette-tridactyle.jpg"},{"id": 57,"fr": "Mouette de Bonaparte","en": "Bonaparte's Gull","count": 1,"group": "Oiseaux marins","img": "images/057-mouette-de-bonaparte.jpg"},{"id": 58,"fr": "Mouette rieuse","en": "Black-headed Gull","count": 5,"group": "Oiseaux marins","img": "images/058-mouette-rieuse.jpg"},{"id": 59,"fr": "Goéland à bec cerclé","en": "Ring-billed Gull","count": 91,"group": "Oiseaux marins","img": "images/059-goeland-a-bec-cercle.jpg"},{"id": 60,"fr": "Goéland hudsonien","en": "American Herring Gull","count": 156,"group": "Oiseaux marins","img": "images/060-goeland-hudsonien.jpg"},{"id": 61,"fr": "Goéland marin","en": "Great Black-backed Gull","count": 113,"group": "Oiseaux marins","img": "images/061-goeland-marin.jpg"},{"id": 62,"fr": "Goéland brun","en": "Lesser Black-backed Gull","count": 3,"group": "Oiseaux marins","img": "images/062-goeland-brun.jpg"},{"id": 63,"fr": "Goéland arctique","en": "Iceland Gull","count": 1,"group": "Oiseaux marins","img": "images/063-goeland-arctique.jpg"},{"id": 64,"fr": "Sterne caspienne","en": "Caspian Tern","count": 17,"group": "Oiseaux marins","img": "images/064-sterne-caspienne.jpg"},{"id": 65,"fr": "Sterne arctique","en": "Arctic Tern","count": 24,"group": "Oiseaux marins","img": "images/065-sterne-arctique.jpg"},{"id": 66,"fr": "Sterne pierregarin","en": "Common Tern","count": 141,"group": "Oiseaux marins","img": "images/066-sterne-pierregarin.jpg"},{"id": 67,"fr": "Grèbe à bec bigarré","en": "Pied-billed Grebe","count": 2,"group": "Oiseaux marins","img": "images/067-grebe-a-bec-bigarre.jpg"},{"id": 68,"fr": "Plongeon catmarin","en": "Red-throated Loon","count": 5,"group": "Oiseaux marins","img": "images/068-plongeon-catmarin.jpg"},{"id": 69,"fr": "Plongeon huard","en": "Common Loon","count": 464,"group": "Oiseaux marins","img": "images/069-plongeon-huard.jpg"},{"id": 70,"fr": "Océanite cul-blanc","en": "Leach's Storm-Petrel","count": 2,"group": "Oiseaux marins","img": "images/070-oceanite-cul-blanc.jpg"},{"id": 71,"fr": "Fulmar boréal","en": "Northern Fulmar","count": 1,"group": "Oiseaux marins","img": "images/071-fulmar-boreal.jpg"},{"id": 72,"fr": "Puffin des Anglais","en": "Manx Shearwater","count": 1,"group": "Oiseaux marins","img": "images/072-puffin-des-anglais.jpg"},{"id": 73,"fr": "Fou de Bassan","en": "Northern Gannet","count": 9,"group": "Oiseaux marins","img": "images/073-fou-de-bassan.jpg"},{"id": 74,"fr": "Grand Cormoran","en": "Great Cormorant","count": 17,"group": "Oiseaux marins","img": "images/074-grand-cormoran.jpg"},{"id": 75,"fr": "Cormoran à aigrettes","en": "Double-crested Cormorant","count": 67,"group": "Oiseaux marins","img": "images/075-cormoran-a-aigrettes.jpg"},{"id": 76,"fr": "Butor d'Amérique","en": "American Bittern","count": 43,"group": "Hérons","img": "images/076-butor-d-amerique.jpg"},{"id": 77,"fr": "Grand Héron","en": "Great Blue Heron","count": 18,"group": "Hérons","img": "images/077-grand-heron.jpg"},{"id": 78,"fr": "Balbuzard pêcheur","en": "Osprey","count": 159,"group": "Rapaces et faucons","img": "images/078-balbuzard-pecheur.jpg"},{"id": 79,"fr": "Épervier brun","en": "Sharp-shinned Hawk","count": 47,"group": "Rapaces et faucons","img": "images/079-epervier-brun.jpg"},{"id": 80,"fr": "Autour d'Amérique","en": "American Goshawk","count": 81,"group": "Rapaces et faucons","img": "images/080-autour-d-amerique.jpg"},{"id": 81,"fr": "Busard des marais","en": "Northern Harrier","count": 167,"group": "Rapaces et faucons","img": "images/081-busard-des-marais.jpg"},{"id": 82,"fr": "Pygargue à tête blanche","en": "Bald Eagle","count": 172,"group": "Rapaces et faucons","img": "images/082-pygargue-a-tete-blanche.jpg"},{"id": 83,"fr": "Buse pattue","en": "Rough-legged Hawk","count": 8,"group": "Rapaces et faucons","img": "images/083-buse-pattue.jpg"},{"id": 84,"fr": "Grand-duc d'Amérique","en": "Great Horned Owl","count": 69,"group": "Chouettes et hiboux","img": "images/084-grand-duc-d-amerique.jpg"},{"id": 85,"fr": "Épervière boréale","en": "Northern Hawk Owl","count": 2,"group": "Chouettes et hiboux","img": "images/085-eperviere-boreale.jpg"},{"id": 86,"fr": "Hibou des marais","en": "Short-eared Owl","count": 24,"group": "Chouettes et hiboux","img": "images/086-hibou-des-marais.jpg"},{"id": 87,"fr": "Nyctale de Tengmalm","en": "Boreal Owl","count": 2,"group": "Chouettes et hiboux","img": "images/087-nyctale-de-tengmalm.jpg"},{"id": 88,"fr": "Petite Nyctale","en": "Northern Saw-whet Owl","count": 37,"group": "Chouettes et hiboux","img": "images/088-petite-nyctale.jpg"},{"id": 89,"fr": "Martin-pêcheur d'Amérique","en": "Belted Kingfisher","count": 239,"group": "Pics et martin-pêcheur","img": "images/089-martin-pecheur-d-amerique.jpg"},{"id": 90,"fr": "Pic maculé","en": "Yellow-bellied Sapsucker","count": 11,"group": "Pics et martin-pêcheur","img": "images/090-pic-macule.jpg"},{"id": 91,"fr": "Pic à dos rayé","en": "American Three-toed Woodpecker","count": 14,"group": "Pics et martin-pêcheur","img": "images/091-pic-a-dos-raye.jpg"},{"id": 92,"fr": "Pic à dos noir","en": "Black-backed Woodpecker","count": 85,"group": "Pics et martin-pêcheur","img": "images/092-pic-a-dos-noir.jpg"},{"id": 93,"fr": "Pic mineur","en": "Downy Woodpecker","count": 264,"group": "Pics et martin-pêcheur","img": "images/093-pic-mineur.jpg"},{"id": 94,"fr": "Pic chevelu","en": "Hairy Woodpecker","count": 245,"group": "Pics et martin-pêcheur","img": "images/094-pic-chevelu.jpg"},{"id": 95,"fr": "Pic flamboyant","en": "Northern Flicker","count": 404,"group": "Pics et martin-pêcheur","img": "images/095-pic-flamboyant.jpg"},{"id": 96,"fr": "Crécerelle d'Amérique","en": "American Kestrel","count": 29,"group": "Rapaces et faucons","img": "images/096-crecerelle-d-amerique.jpg"},{"id": 97,"fr": "Faucon émerillon","en": "Merlin","count": 179,"group": "Rapaces et faucons","img": "images/097-faucon-emerillon.jpg"},{"id": 98,"fr": "Faucon pèlerin","en": "Peregrine Falcon","count": 4,"group": "Rapaces et faucons","img": "images/098-faucon-pelerin.jpg"},{"id": 99,"fr": "Moucherolle à côtés olive","en": "Olive-sided Flycatcher","count": 210,"group": "Moucherolles et viréos","img": "images/099-moucherolle-a-cotes-olive.jpg"},{"id": 100,"fr": "Pioui de l'Est","en": "Eastern Wood-Pewee","count": 5,"group": "Moucherolles et viréos","img": "images/100-pioui-de-l-est.jpg"},{"id": 101,"fr": "Moucherolle à ventre jaune","en": "Yellow-bellied Flycatcher","count": 653,"group": "Moucherolles et viréos","img": "images/101-moucherolle-a-ventre-jaune.jpg"},{"id": 102,"fr": "Moucherolle des aulnes","en": "Alder Flycatcher","count": 172,"group": "Moucherolles et viréos","img": "images/102-moucherolle-des-aulnes.jpg"},{"id": 103,"fr": "Moucherolle tchébec","en": "Least Flycatcher","count": 27,"group": "Moucherolles et viréos","img": "images/103-moucherolle-tchebec.jpg"},{"id": 104,"fr": "Moucherolle phébi","en": "Eastern Phoebe","count": 3,"group": "Moucherolles et viréos","img": "images/104-moucherolle-phebi.jpg"},{"id": 105,"fr": "Tyran tritri","en": "Eastern Kingbird","count": 7,"group": "Moucherolles et viréos","img": "images/105-tyran-tritri.jpg"},{"id": 106,"fr": "Viréo à tête bleue","en": "Blue-headed Vireo","count": 281,"group": "Moucherolles et viréos","img": "images/106-vireo-a-tete-bleue.jpg"},{"id": 107,"fr": "Viréo de Philadelphie","en": "Philadelphia Vireo","count": 21,"group": "Moucherolles et viréos","img": "images/107-vireo-de-philadelphie.jpg"},{"id": 108,"fr": "Viréo aux yeux rouges","en": "Red-eyed Vireo","count": 59,"group": "Moucherolles et viréos","img": "images/108-vireo-aux-yeux-rouges.jpg"},{"id": 109,"fr": "Pie-grièche boréale","en": "Northern Shrike","count": 6,"group": "Moucherolles et viréos","img": "images/109-pie-grieche-boreale.jpg"},{"id": 110,"fr": "Mésangeai du Canada","en": "Canada Jay","count": 425,"group": "Corvidés","img": "images/110-mesangeai-du-canada.jpg"},{"id": 111,"fr": "Geai bleu","en": "Blue Jay","count": 261,"group": "Corvidés","img": "images/111-geai-bleu.jpg"},{"id": 112,"fr": "Corneille d'Amérique","en": "American Crow","count": 483,"group": "Corvidés","img": "images/112-corneille-d-amerique.jpg"},{"id": 113,"fr": "Grand Corbeau","en": "Common Raven","count": 436,"group": "Corvidés","img": "images/113-grand-corbeau.jpg"},{"id": 114,"fr": "Mésange à tête noire","en": "Black-capped Chickadee","count": 519,"group": "Mésanges, roitelets et hirondelles","img": "images/114-mesange-a-tete-noire.jpg"},{"id": 115,"fr": "Mésange à tête brune","en": "Boreal Chickadee","count": 546,"group": "Mésanges, roitelets et hirondelles","img": "images/115-mesange-a-tete-brune.jpg"},{"id": 116,"fr": "Alouette hausse-col","en": "Horned Lark","count": 51,"group": "Mésanges, roitelets et hirondelles","img": "images/116-alouette-hausse-col.jpg"},{"id": 117,"fr": "Hirondelle de rivage","en": "Bank Swallow","count": 27,"group": "Mésanges, roitelets et hirondelles","img": "images/117-hirondelle-de-rivage.jpg"},{"id": 118,"fr": "Hirondelle bicolore","en": "Tree Swallow","count": 375,"group": "Mésanges, roitelets et hirondelles","img": "images/118-hirondelle-bicolore.jpg"},{"id": 119,"fr": "Hirondelle rustique","en": "Barn Swallow","count": 14,"group": "Mésanges, roitelets et hirondelles","img": "images/119-hirondelle-rustique.jpg"},{"id": 120,"fr": "Hirondelle à front blanc","en": "Cliff Swallow","count": 1,"group": "Mésanges, roitelets et hirondelles","img": "images/120-hirondelle-a-front-blanc.jpg"},{"id": 121,"fr": "Roitelet à couronne rubis","en": "Ruby-crowned Kinglet","count": 658,"group": "Mésanges, roitelets et hirondelles","img": "images/121-roitelet-a-couronne-rubis.jpg"},{"id": 122,"fr": "Roitelet à couronne dorée","en": "Golden-crowned Kinglet","count": 421,"group": "Mésanges, roitelets et hirondelles","img": "images/122-roitelet-a-couronne-doree.jpg"},{"id": 123,"fr": "Sittelle à poitrine rousse","en": "Red-breasted Nuthatch","count": 194,"group": "Mésanges, roitelets et hirondelles","img": "images/123-sittelle-a-poitrine-rousse.jpg"},{"id": 124,"fr": "Grimpereau brun","en": "Brown Creeper","count": 28,"group": "Mésanges, roitelets et hirondelles","img": "images/124-grimpereau-brun.jpg"},{"id": 125,"fr": "Troglodyte des forêts","en": "Winter Wren","count": 89,"group": "Mésanges, roitelets et hirondelles","img": "images/125-troglodyte-des-forets.jpg"},{"id": 126,"fr": "Étourneau sansonnet","en": "European Starling","count": 252,"group": "Grives, moqueurs et jaseurs","img": "images/126-etourneau-sansonnet.jpg"},{"id": 127,"fr": "Moqueur chat","en": "Gray Catbird","count": 37,"group": "Grives, moqueurs et jaseurs","img": "images/127-moqueur-chat.jpg"},{"id": 128,"fr": "Moqueur polyglotte","en": "Northern Mockingbird","count": 1,"group": "Grives, moqueurs et jaseurs","img": "images/128-moqueur-polyglotte.jpg"},{"id": 129,"fr": "Grive fauve","en": "Veery","count": 4,"group": "Grives, moqueurs et jaseurs","img": "images/129-grive-fauve.jpg"},{"id": 130,"fr": "Grive à joues grises","en": "Gray-cheeked Thrush","count": 44,"group": "Grives, moqueurs et jaseurs","img": "images/130-grive-a-joues-grises.jpg"},{"id": 131,"fr": "Grive à dos olive","en": "Swainson's Thrush","count": 400,"group": "Grives, moqueurs et jaseurs","img": "images/131-grive-a-dos-olive.jpg"},{"id": 132,"fr": "Grive solitaire","en": "Hermit Thrush","count": 619,"group": "Grives, moqueurs et jaseurs","img": "images/132-grive-solitaire.jpg"},{"id": 133,"fr": "Merle d'Amérique","en": "American Robin","count": 763,"group": "Grives, moqueurs et jaseurs","img": "images/133-merle-d-amerique.jpg"},{"id": 134,"fr": "Jaseur boréal","en": "Bohemian Waxwing","count": 5,"group": "Grives, moqueurs et jaseurs","img": "images/134-jaseur-boreal.jpg"},{"id": 135,"fr": "Jaseur d'Amérique","en": "Cedar Waxwing","count": 318,"group": "Grives, moqueurs et jaseurs","img": "images/135-jaseur-d-amerique.jpg"},{"id": 136,"fr": "Moineau domestique","en": "House Sparrow","count": 171,"group": "Bruants, fringilles et alliés","img": "images/136-moineau-domestique.jpg"},{"id": 137,"fr": "Pipit d'Amérique","en": "American Pipit","count": 68,"group": "Bruants, fringilles et alliés","img": "images/137-pipit-d-amerique.jpg"},{"id": 138,"fr": "Gros-bec errant","en": "Evening Grosbeak","count": 92,"group": "Bruants, fringilles et alliés","img": "images/138-gros-bec-errant.jpg"},{"id": 139,"fr": "Durbec des sapins","en": "Pine Grosbeak","count": 425,"group": "Bruants, fringilles et alliés","img": "images/139-durbec-des-sapins.jpg"},{"id": 140,"fr": "Roselin pourpré","en": "Purple Finch","count": 367,"group": "Bruants, fringilles et alliés","img": "images/140-roselin-pourpre.jpg"},{"id": 141,"fr": "Sizerin flammé","en": "Redpoll","count": 37,"group": "Bruants, fringilles et alliés","img": "images/141-sizerin-flamme.jpg"},{"id": 142,"fr": "Bec-croisé des sapins","en": "Red Crossbill","count": 97,"group": "Bruants, fringilles et alliés","img": "images/142-bec-croise-des-sapins.jpg"},{"id": 143,"fr": "Bec-croisé bifascié","en": "White-winged Crossbill","count": 348,"group": "Bruants, fringilles et alliés","img": "images/143-bec-croise-bifascie.jpg"},{"id": 144,"fr": "Tarin des pins","en": "Pine Siskin","count": 308,"group": "Bruants, fringilles et alliés","img": "images/144-tarin-des-pins.jpg"},{"id": 145,"fr": "Chardonneret jaune","en": "American Goldfinch","count": 371,"group": "Bruants, fringilles et alliés","img": "images/145-chardonneret-jaune.jpg"},{"id": 146,"fr": "Plectrophane des neiges","en": "Snow Bunting","count": 1,"group": "Bruants, fringilles et alliés","img": "images/146-plectrophane-des-neiges.jpg"},{"id": 147,"fr": "Bruant familier","en": "Chipping Sparrow","count": 15,"group": "Bruants, fringilles et alliés","img": "images/147-bruant-familier.jpg"},{"id": 148,"fr": "Bruant hudsonien","en": "American Tree Sparrow","count": 14,"group": "Bruants, fringilles et alliés","img": "images/148-bruant-hudsonien.jpg"},{"id": 149,"fr": "Bruant fauve","en": "Fox Sparrow","count": 704,"group": "Bruants, fringilles et alliés","img": "images/149-bruant-fauve.jpg"},{"id": 150,"fr": "Junco ardoisé","en": "Dark-eyed Junco","count": 616,"group": "Bruants, fringilles et alliés","img": "images/150-junco-ardoise.jpg"},{"id": 151,"fr": "Bruant à couronne blanche","en": "White-crowned Sparrow","count": 37,"group": "Bruants, fringilles et alliés","img": "images/151-bruant-a-couronne-blanche.jpg"},{"id": 152,"fr": "Bruant à gorge blanche","en": "White-throated Sparrow","count": 754,"group": "Bruants, fringilles et alliés","img": "images/152-bruant-a-gorge-blanche.jpg"},{"id": 153,"fr": "Bruant de Nelson","en": "Nelson's Sparrow","count": 1,"group": "Bruants, fringilles et alliés","img": "images/153-bruant-de-nelson.jpg"},{"id": 154,"fr": "Bruant des prés","en": "Savannah Sparrow","count": 477,"group": "Bruants, fringilles et alliés","img": "images/154-bruant-des-pres.jpg"},{"id": 155,"fr": "Bruant chanteur","en": "Song Sparrow","count": 286,"group": "Bruants, fringilles et alliés","img": "images/155-bruant-chanteur.jpg"},{"id": 156,"fr": "Bruant de Lincoln","en": "Lincoln's Sparrow","count": 511,"group": "Bruants, fringilles et alliés","img": "images/156-bruant-de-lincoln.jpg"},{"id": 157,"fr": "Bruant des marais","en": "Swamp Sparrow","count": 538,"group": "Bruants, fringilles et alliés","img": "images/157-bruant-des-marais.jpg"},{"id": 158,"fr": "Cardinal à poitrine rose","en": "Rose-breasted Grosbeak","count": 9,"group": "Bruants, fringilles et alliés","img": "images/158-cardinal-a-poitrine-rose.jpg"},{"id": 159,"fr": "Passerin indigo","en": "Indigo Bunting","count": 1,"group": "Bruants, fringilles et alliés","img": "images/159-passerin-indigo.jpg"},{"id": 160,"fr": "Goglu des prés","en": "Bobolink","count": 1,"group": "Carouges et orioles","img": "images/160-goglu-des-pres.jpg"},{"id": 161,"fr": "Carouge à épaulettes","en": "Red-winged Blackbird","count": 17,"group": "Carouges et orioles","img": "images/161-carouge-a-epaulettes.jpg"},{"id": 162,"fr": "Vacher à tête brune","en": "Brown-headed Cowbird","count": 2,"group": "Carouges et orioles","img": "images/162-vacher-a-tete-brune.jpg"},{"id": 163,"fr": "Quiscale rouilleux","en": "Rusty Blackbird","count": 139,"group": "Carouges et orioles","img": "images/163-quiscale-rouilleux.jpg"},{"id": 164,"fr": "Quiscale bronzé","en": "Common Grackle","count": 99,"group": "Carouges et orioles","img": "images/164-quiscale-bronze.jpg"},{"id": 165,"fr": "Paruline couronnée","en": "Ovenbird","count": 142,"group": "Parulines","img": "images/165-paruline-couronnee.jpg"},{"id": 166,"fr": "Paruline des ruisseaux","en": "Northern Waterthrush","count": 672,"group": "Parulines","img": "images/166-paruline-des-ruisseaux.jpg"},{"id": 167,"fr": "Paruline noir et blanc","en": "Black-and-white Warbler","count": 637,"group": "Parulines","img": "images/167-paruline-noir-et-blanc.jpg"},{"id": 168,"fr": "Paruline obscure","en": "Tennessee Warbler","count": 250,"group": "Parulines","img": "images/168-paruline-obscure.jpg"},{"id": 169,"fr": "Paruline à joues grises","en": "Nashville Warbler","count": 15,"group": "Parulines","img": "images/169-paruline-a-joues-grises.jpg"},{"id": 170,"fr": "Paruline triste","en": "Mourning Warbler","count": 340,"group": "Parulines","img": "images/170-paruline-triste.jpg"},{"id": 171,"fr": "Paruline masquée","en": "Common Yellowthroat","count": 499,"group": "Parulines","img": "images/171-paruline-masquee.jpg"},{"id": 172,"fr": "Paruline flamboyante","en": "American Redstart","count": 502,"group": "Parulines","img": "images/172-paruline-flamboyante.jpg"},{"id": 173,"fr": "Paruline tigrée","en": "Cape May Warbler","count": 53,"group": "Parulines","img": "images/173-paruline-tigree.jpg"},{"id": 174,"fr": "Paruline à collier","en": "Northern Parula","count": 16,"group": "Parulines","img": "images/174-paruline-a-collier.jpg"},{"id": 175,"fr": "Paruline à tête cendrée","en": "Magnolia Warbler","count": 552,"group": "Parulines","img": "images/175-paruline-a-tete-cendree.jpg"},{"id": 176,"fr": "Paruline à poitrine baie","en": "Bay-breasted Warbler","count": 74,"group": "Parulines","img": "images/176-paruline-a-poitrine-baie.jpg"},{"id": 177,"fr": "Paruline à gorge orangée","en": "Blackburnian Warbler","count": 10,"group": "Parulines","img": "images/177-paruline-a-gorge-orangee.jpg"},{"id": 178,"fr": "Paruline jaune","en": "Northern Yellow Warbler","count": 626,"group": "Parulines","img": "images/178-paruline-jaune.jpg"},{"id": 179,"fr": "Paruline à flancs marron","en": "Chestnut-sided Warbler","count": 4,"group": "Parulines","img": "images/179-paruline-a-flancs-marron.jpg"},{"id": 180,"fr": "Paruline rayée","en": "Blackpoll Warbler","count": 552,"group": "Parulines","img": "images/180-paruline-rayee.jpg"},{"id": 181,"fr": "Paruline bleue","en": "Black-throated Blue Warbler","count": 1,"group": "Parulines","img": "images/181-paruline-bleue.jpg"},{"id": 182,"fr": "Paruline à couronne rousse","en": "Palm Warbler","count": 238,"group": "Parulines","img": "images/182-paruline-a-couronne-rousse.jpg"},{"id": 183,"fr": "Paruline à croupion jaune","en": "Yellow-rumped Warbler","count": 674,"group": "Parulines","img": "images/183-paruline-a-croupion-jaune.jpg"},{"id": 184,"fr": "Paruline à gorge noire","en": "Black-throated Green Warbler","count": 436,"group": "Parulines","img": "images/184-paruline-a-gorge-noire.jpg"},{"id": 185,"fr": "Paruline à calotte noire","en": "Wilson's Warbler","count": 537,"group": "Parulines","img": "images/185-paruline-a-calotte-noire.jpg"}];
 
- // ---------- SHINY (rares / légendaires) ----------
- {id:25,fr:"Mouette blanche",en:"Ivory Gull",sci:"Pagophila eburnea",type:"gull",rare:true,img:"images/025-mouette-blanche.jpg",
-  pal:["#ffffff","#e8f4ff","#1a1a1a"],region:"Visiteur arctique",hab:"Banquise, ports en hiver",
-  blurb:"Un fantôme entièrement blanc venu de la haute Arctique, qui suit la banquise. Une apparition en Terre-Neuve déclenche un pèlerinage d'observateurs.",
-  size:"43 cm",seen:"Hiver, ports nordiques",astuce:"Blanc pur, pattes noires"},
- {id:26,fr:"Mouette rose",en:"Ross's Gull",sci:"Rhodostethia rosea",type:"gull",rare:true,img:"images/026-mouette-rose.jpg",
-  pal:["#ffd9e0","#f4f7fb","#1a1a1a"],region:"Visiteur arctique",hab:"Eaux froides du Nord",
-  blurb:"Le graal absolu : petite mouette à collier fin et lavis rosé, nichant dans la toundra sibérienne. Quelques mentions par décennie. Prise mythique.",
-  size:"31 cm",seen:"Très rare, hiver",astuce:"Queue en pointe, teinte rose"},
- {id:27,fr:"Arlequin plongeur",en:"Harlequin Duck",sci:"Histrionicus histrionicus",type:"duck",rare:true,img:"images/027-arlequin-plongeur.jpg",
-  pal:["#2a3a8a","#c23a3a","#f2f2f2"],region:"Spécialité de l'Est",hab:"Torrents, côtes rocheuses",
-  blurb:"Un canard peint à la main : ardoise, taches blanches cerclées, flancs roux. La population de l'Est est rare et précieuse. Aime l'eau vive et les brisants.",
-  size:"40 cm",seen:"Côtes rocheuses, hiver",astuce:"Dans le ressac, près des rochers"},
- {id:28,fr:"Eider à tête grise",en:"King Eider",sci:"Somateria spectabilis",type:"duck",rare:true,img:"images/028-eider-a-tete-grise.jpg",
-  pal:["#3a4a9a","#e8943a","#f2f2f2"],region:"Visiteur arctique",hab:"Côtes, parmi les eiders communs",
-  blurb:"Le roi : front orange bombé et écusson facial extravagants chez le mâle. Niche dans la toundra, hiverne au sud en petit nombre. À trier dans les radeaux d'eiders.",
-  size:"55 cm",seen:"Hiver, parmi les eiders",astuce:"Cherchez le « bouton » orange"},
- {id:29,fr:"Lagopède alpin",en:"Rock Ptarmigan",sci:"Lagopus muta",type:"gamebird",rare:true,img:"images/029-lagopede-alpin.jpg",
-  pal:["#7a7a7a","#f4f4f4","#1a1a1a"],region:"Toundra & barrens",hab:"Hauts plateaux du Labrador",
-  blurb:"Cousin plus montagnard du lagopède des saules, fidèle aux sommets dénudés et à la toundra alpine du Labrador. Le mâle garde un fin trait noir de l'œil au bec.",
-  size:"34 cm",seen:"Sommets, Labrador",astuce:"Plus haut et plus au nord"},
- {id:30,fr:"Faucon gerfaut",en:"Gyrfalcon",sci:"Falco rusticolus",type:"raptor",rare:true,img:"images/030-faucon-gerfaut.jpg",
-  pal:["#c8ccce","#6a7378","#f2f2f2"],region:"Visiteur arctique",hab:"Côtes et toundra du Labrador",
-  blurb:"Le plus grand des faucons, seigneur de l'Arctique. Du gris-blanc au presque noir selon les individus. Fond sur ses proies en vol puissant et rasant.",
-  size:"1,3 m d'envergure",seen:"Labrador, côtes en hiver",astuce:"Massif, battements lents"},
- {id:31,fr:"Harfang des neiges",en:"Snowy Owl",sci:"Bubo scandiacus",type:"owl",rare:true,img:"images/031-harfang-des-neiges.jpg",
-  pal:["#ffffff","#e8eef2","#1a1a1a"],region:"Visiteur arctique",hab:"Champs ouverts, côtes, hiver",
-  blurb:"Le hibou blanc de l'Arctique, diurne, posé bien en vue sur un poteau ou une dune. Les hivers d'irruption en amènent vers le sud. Yeux d'or perçants.",
-  size:"1,5 m d'envergure",seen:"Hiver, terrains ouverts",astuce:"Grosse boule blanche au sol"},
- {id:32,fr:"Chouette épervière",en:"Northern Hawk Owl",sci:"Surnia ulula",type:"owl",rare:true,img:"images/032-chouette-eperviere.jpg",
-  pal:["#5a4a3a","#f2f2f2","#3a2e22"],region:"Forêt boréale",hab:"Clairières, chablis boréals",
-  blurb:"Mi-chouette, mi-épervier : chasse de jour, perchée à la cime d'un arbre mort, longue queue de faucon. Discrète et localisée, c'est une belle prise boréale.",
-  size:"40 cm",seen:"Cimes, brûlis",astuce:"Diurne, posée bien en évidence"},
- {id:33,fr:"Traquet motteux",en:"Northern Wheatear",sci:"Oenanthe oenanthe",type:"songbird",rare:true,img:"images/033-traquet-motteux.jpg",
-  pal:["#c8a86a","#f2efe6","#2a2a2a"],region:"Toundra & barrens",hab:"Landes pierreuses",
-  blurb:"Un migrateur extraordinaire qui rejoint l'Afrique chaque automne. Niche dans les barrens du Labrador et de Terre-Neuve. Croupion blanc éclatant à l'envol.",
-  size:"15 cm",seen:"Barrens, été",astuce:"Bondit de roche en roche"},
- {id:34,fr:"Vanneau huppé",en:"Northern Lapwing",sci:"Vanellus vanellus",type:"wader",rare:true,img:"images/034-vanneau-huppe.jpg",
-  pal:["#1a6a5a","#f2f2f2","#c8a83a"],region:"Vagabond européen",hab:"Champs, après les tempêtes",
-  blurb:"Star des arrivées européennes : poussés par les tempêtes d'automne, des vanneaux atterrissent parfois en nombre dans les champs. Longue huppe fine et dos vert iridescent.",
-  size:"30 cm",seen:"Champs, fin d'automne",astuce:"Après une grosse dépression d'est"},
- {id:35,fr:"Grive litorne",en:"Fieldfare",sci:"Turdus pilaris",type:"songbird",rare:true,img:"images/035-grive-litorne.jpg",
-  pal:["#6a5a44","#9a4a3a","#c8c2b6"],region:"Vagabond européen",hab:"Sorbiers, vergers, hiver",
-  blurb:"Grive nordique d'Europe, échouée ici par les vents d'est. Tête grise, dos marron, croupion gris pâle. Souvent avec des merles à se gaver de petits fruits.",
-  size:"25 cm",seen:"Hiver, arbres fruitiers",astuce:"Cri caquetant « tchak-tchak »"},
- {id:36,fr:"Grive mauvis",en:"Redwing",sci:"Turdus iliacus",type:"songbird",rare:true,img:"images/036-grive-mauvis.jpg",
-  pal:["#7a6450","#c23a2a","#efe7da"],region:"Vagabond européen",hab:"Haies, fourrés, hiver",
-  blurb:"L'autre grive européenne égarée : sourcil crème net et flancs roux orangé sous l'aile. Apparaît avec les litornes lors des grandes arrivées transatlantiques.",
-  size:"21 cm",seen:"Hiver, fourrés à baies",astuce:"Roux orangé sous l'aile"},
-];
+const SHINY_MAX = 5; // <= ce nombre de mentions = espèce rare (shiny)
 
-/* ============================ SILHOUETTES SVG (repli si photo absente) ============================ */
-function birdSVG(type, pal){
-  const c1=pal[0], c2=pal[1]||pal[0], c3=pal[2]||pal[1]||pal[0];
-  const sets = {
-    songbird:`
-      <ellipse cx="46" cy="54" rx="23" ry="18" fill="${c1}"/>
-      <path d="M30 60 L10 84 L34 64 Z" fill="${c1}"/>
-      <ellipse cx="42" cy="58" rx="16" ry="11" fill="${c3}" opacity=".85"/>
-      <circle cx="63" cy="37" r="14" fill="${c1}"/>
-      <path d="M76 35 L92 39 L76 44 Z" fill="${c2}"/>
-      <circle cx="67" cy="34" r="2.6" fill="#0a0a0a"/>
-      <rect x="44" y="70" width="2.4" height="12" fill="${c2}"/>
-      <rect x="52" y="70" width="2.4" height="12" fill="${c2}"/>`,
-    raptor:`
-      <ellipse cx="46" cy="56" rx="24" ry="20" fill="${c1}"/>
-      <path d="M28 64 L10 86 L34 68 Z" fill="${c1}"/>
-      <ellipse cx="62" cy="34" rx="15" ry="14" fill="${c2}"/>
-      <path d="M75 32 q10 1 11 8 q-7 -2 -11 1 Z" fill="${c3}"/>
-      <circle cx="66" cy="32" r="2.8" fill="#0a0a0a"/>
-      <path d="M40 60 q-6 14 4 22 q4 -12 0 -22" fill="${c3}" opacity=".5"/>`,
-    owl:`
-      <ellipse cx="50" cy="64" rx="26" ry="24" fill="${c1}"/>
-      <circle cx="50" cy="34" r="25" fill="${c1}"/>
-      <circle cx="38" cy="33" r="10" fill="${c2}"/>
-      <circle cx="62" cy="33" r="10" fill="${c2}"/>
-      <circle cx="38" cy="33" r="4.5" fill="#0a0a0a"/>
-      <circle cx="62" cy="33" r="4.5" fill="#0a0a0a"/>
-      <path d="M50 38 L45 46 L55 46 Z" fill="${c3}"/>
-      <path d="M28 14 L34 30 L40 22 Z" fill="${c1}"/>
-      <path d="M72 14 L66 30 L60 22 Z" fill="${c1}"/>`,
-    duck:`
-      <ellipse cx="44" cy="58" rx="32" ry="15" fill="${c1}"/>
-      <path d="M14 56 L6 48 L20 54 Z" fill="${c1}"/>
-      <ellipse cx="48" cy="56" rx="22" ry="9" fill="${c3}" opacity=".7"/>
-      <circle cx="72" cy="44" r="12" fill="${c2}"/>
-      <path d="M83 40 L97 43 L97 49 L83 50 Z" fill="${c3}"/>
-      <circle cx="75" cy="41" r="2.6" fill="#0a0a0a"/>`,
-    gull:`
-      <ellipse cx="46" cy="56" rx="24" ry="14" fill="${c1}"/>
-      <path d="M26 50 q-14 -8 -22 -2 q12 2 22 8 Z" fill="${c2}"/>
-      <path d="M30 62 L14 82 L36 66 Z" fill="${c1}"/>
-      <circle cx="66" cy="42" r="11" fill="${c1}"/>
-      <path d="M77 41 L92 44 L77 47 Z" fill="${c3}"/>
-      <circle cx="69" cy="40" r="2.4" fill="#0a0a0a"/>
-      <rect x="48" y="68" width="2.2" height="12" fill="${c3}"/>
-      <rect x="56" y="68" width="2.2" height="12" fill="${c3}"/>`,
-    seabird:`
-      <ellipse cx="50" cy="50" rx="9" ry="13" fill="${c1}"/>
-      <path d="M50 48 q-22 -22 -42 -8 q24 0 42 16 Z" fill="${c1}"/>
-      <path d="M50 48 q22 -22 42 -8 q-24 0 -42 16 Z" fill="${c1}"/>
-      <path d="M48 38 q2 -10 2 -16 q0 6 2 16 Z" fill="${c2}"/>
-      <circle cx="50" cy="30" r="6" fill="${c1}"/>
-      <path d="M50 25 L52 16 L48 16 Z" fill="${c3}"/>
-      <path d="M50 62 L46 78 L54 78 Z" fill="${c2}" opacity=".8"/>`,
-    alcid:`
-      <ellipse cx="50" cy="60" rx="19" ry="27" fill="${c1}"/>
-      <ellipse cx="50" cy="55" rx="13" ry="20" fill="${c2}"/>
-      <circle cx="46" cy="28" r="14" fill="${c1}"/>
-      <path d="M33 22 L18 28 L33 36 Z" fill="${c3}"/>
-      <path d="M33 26 L21 29 L33 32 Z" fill="${c2}" opacity=".6"/>
-      <circle cx="44" cy="25" r="2.6" fill="#0a0a0a"/>
-      <path d="M42 86 L36 94 L48 88 Z" fill="${c3}"/>
-      <path d="M58 86 L64 94 L52 88 Z" fill="${c3}"/>`,
-    gamebird:`
-      <ellipse cx="44" cy="58" rx="28" ry="24" fill="${c1}"/>
-      <path d="M18 50 L4 44 L20 54 Z" fill="${c1}"/>
-      <ellipse cx="48" cy="62" rx="20" ry="14" fill="${c3}" opacity=".55"/>
-      <circle cx="66" cy="40" r="10" fill="${c2}"/>
-      <path d="M75 39 L84 41 L75 44 Z" fill="${c2}"/>
-      <circle cx="68" cy="38" r="2.4" fill="#0a0a0a"/>`,
-    wader:`
-      <ellipse cx="46" cy="50" rx="23" ry="15" fill="${c1}"/>
-      <path d="M28 56 L12 76 L34 60 Z" fill="${c1}"/>
-      <circle cx="64" cy="34" r="11" fill="${c1}"/>
-      <path d="M74 33 L86 35 L74 38 Z" fill="${c2}"/>
-      <path d="M68 24 q10 -10 16 -16 q-10 4 -16 14" stroke="${c3}" stroke-width="2.4" fill="none"/>
-      <circle cx="66" cy="32" r="2.4" fill="#0a0a0a"/>
-      <rect x="42" y="64" width="2" height="20" fill="${c3}"/>
-      <rect x="52" y="64" width="2" height="20" fill="${c3}"/>`
-  };
-  return `<svg class="bird" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${sets[type]||sets.songbird}</svg>`;
+function rarityInfo(n){
+  if(n<=1)  return {label:"Exceptionnel", tier:4};
+  if(n<=5)  return {label:"Rare",        tier:3};
+  if(n<=30) return {label:"Peu commun",  tier:2};
+  if(n<=100)return {label:"Assez commun",tier:1};
+  return {label:"Commun", tier:0};
 }
+BIRDS.forEach(b=>{ b.rare = b.count<=SHINY_MAX; b.rinfo = rarityInfo(b.count); });
 
 const contoursSVG = `<svg class="contours" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
   <g fill="none" stroke="#3a5a66" stroke-width="0.6">
-    <path d="M-5 70 Q30 55 55 68 T110 60"/>
-    <path d="M-5 82 Q30 68 55 80 T110 72"/>
-    <path d="M-5 92 Q30 80 55 92 T110 84"/>
-    <path d="M-5 40 Q35 30 60 40 T110 34"/>
+    <path d="M-5 70 Q30 55 55 68 T110 60"/><path d="M-5 82 Q30 68 55 80 T110 72"/>
+    <path d="M-5 92 Q30 80 55 92 T110 84"/><path d="M-5 40 Q35 30 60 40 T110 34"/>
   </g></svg>`;
 
-/* construit le bloc photo (avec repli silhouette si l'image manque) */
-function spriteHTML(b, big){
-  const fb = birdSVG(b.type,b.pal).replace('class="bird"','class="bird" style="display:none"');
-  return `
-    ${contoursSVG}
-    <img class="photo" src="${b.img}" alt="${b.fr}" loading="lazy"
-         onerror="this.style.display='none';this.parentNode.querySelector('.bird').style.display='block';">
-    ${fb}
+function spriteHTML(b){
+  return `${contoursSVG}
+    <div class="qmark">?</div>
+    <img class="photo" src="${b.img}" alt="${b.fr}" loading="lazy" onerror="this.style.display='none';">
     ${b.rare?'<div class="holo"></div><span class="spark s1">✦</span><span class="spark s2">✦</span><span class="spark s3">✦</span>':''}`;
 }
 
-/* ============================ ÉTAT ============================ */
 let seen = {}; let filter = "all"; let query = "";
-const REGIONS = ["Mer & falaises","Forêt boréale","Côtes & baies","Toundra & barrens","Visiteur arctique","Vagabond européen"];
+const GROUPS = [...new Set(BIRDS.map(b=>b.group))];
 
-/* persistance : window.storage si dispo (artefact Claude), sinon localStorage (site GitHub) */
 async function loadSeen(){
-  try{
-    if(typeof window.storage!=="undefined" && window.storage){
-      const r = await window.storage.get("ornidex_seen");
-      if(r && r.value){ seen = JSON.parse(r.value); return; }
-    }
-  }catch(e){}
-  try{ const ls = localStorage.getItem("ornidex_seen"); if(ls) seen = JSON.parse(ls); }catch(e){ seen = {}; }
+  try{ if(typeof window.storage!=="undefined" && window.storage){ const r=await window.storage.get("ornidex_seen"); if(r&&r.value){ seen=JSON.parse(r.value); return; } } }catch(e){}
+  try{ const ls=localStorage.getItem("ornidex_seen"); if(ls) seen=JSON.parse(ls); }catch(e){ seen={}; }
 }
 async function saveSeen(){
   try{ if(typeof window.storage!=="undefined" && window.storage){ await window.storage.set("ornidex_seen", JSON.stringify(seen)); } }catch(e){}
   try{ localStorage.setItem("ornidex_seen", JSON.stringify(seen)); }catch(e){}
 }
 
-/* ============================ RENDU ============================ */
 const grid = document.getElementById('grid');
-
 function matches(b){
   if(filter==="common" && b.rare) return false;
   if(filter==="shiny" && !b.rare) return false;
-  if(filter.startsWith("region:") && b.region !== filter.slice(7)) return false;
-  if(query){
-    const q=query.toLowerCase();
-    if(!(b.fr.toLowerCase().includes(q)||b.en.toLowerCase().includes(q)||b.sci.toLowerCase().includes(q)||b.region.toLowerCase().includes(q))) return false;
-  }
+  if(filter.startsWith("group:") && b.group !== filter.slice(6)) return false;
+  if(query){ const q=query.toLowerCase();
+    if(!(b.fr.toLowerCase().includes(q)||b.en.toLowerCase().includes(q)||b.group.toLowerCase().includes(q))) return false; }
   return true;
 }
-
 function renderGrid(){
   const list = BIRDS.filter(matches);
-  grid.innerHTML = "";
-  if(!list.length){ grid.innerHTML = `<div class="empty">Aucune espèce ne correspond.</div>`; return; }
+  grid.innerHTML="";
+  if(!list.length){ grid.innerHTML=`<div class="empty">Aucune espèce ne correspond.</div>`; return; }
   list.forEach((b,i)=>{
-    const isSeen = !!seen[b.id];
-    const card = document.createElement('div');
-    card.className = `card ${b.rare?'shiny':''} ${isSeen?'seen':''}`;
-    card.style.animationDelay = (i*28)+"ms";
-    card.innerHTML = `
+    const isSeen=!!seen[b.id];
+    const card=document.createElement('div');
+    card.className=`card ${b.rare?'shiny':''} ${isSeen?'seen':''}`;
+    card.style.animationDelay=(Math.min(i,40)*22)+"ms";
+    card.innerHTML=`
       <div class="dexno">N°${String(b.id).padStart(3,'0')}</div>
       <div class="seen-dot"></div>
-      <div class="sprite">${spriteHTML(b,false)}</div>
+      <div class="sprite">${spriteHTML(b)}</div>
       <div class="nameFr">${b.fr}</div>
       <div class="nameEn">${b.en}</div>
       <div class="tagrow">
-        <span class="tag">${b.region}</span>
+        <span class="tag ${b.rare?'rare':''}">${b.rinfo.label}</span>
         ${b.rare?'<span class="tag rare">★ Shiny</span>':''}
       </div>`;
-    card.onclick = ()=>openSheet(b);
+    card.onclick=()=>openSheet(b);
     grid.appendChild(card);
   });
   updateStats();
 }
-
 function updateStats(){
-  const total = BIRDS.length;
-  const shinyTotal = BIRDS.filter(b=>b.rare).length;
-  const seenCount = BIRDS.filter(b=>seen[b.id]).length;
-  const shinyCount = BIRDS.filter(b=>b.rare && seen[b.id]).length;
-  document.getElementById('total').textContent = total;
-  document.getElementById('shinyTotal').textContent = shinyTotal;
-  document.getElementById('seenCount').textContent = seenCount;
-  document.getElementById('shinyCount').textContent = shinyCount;
-  document.getElementById('barFill').style.width = (seenCount/total*100)+"%";
+  const total=BIRDS.length, shinyTotal=BIRDS.filter(b=>b.rare).length;
+  const seenCount=BIRDS.filter(b=>seen[b.id]).length, shinyCount=BIRDS.filter(b=>b.rare&&seen[b.id]).length;
+  document.getElementById('total').textContent=total;
+  document.getElementById('shinyTotal').textContent=shinyTotal;
+  document.getElementById('seenCount').textContent=seenCount;
+  document.getElementById('shinyCount').textContent=shinyCount;
+  document.getElementById('barFill').style.width=(seenCount/total*100)+"%";
 }
 
-/* ---------- modal ---------- */
-const overlay = document.getElementById('overlay');
-const sheet = document.getElementById('sheet');
-
+const overlay=document.getElementById('overlay'), sheet=document.getElementById('sheet');
 function openSheet(b){
-  const isSeen = !!seen[b.id];
-  sheet.className = "sheet "+(b.rare?"shiny":"");
-  sheet.innerHTML = `
+  const isSeen=!!seen[b.id];
+  sheet.className="sheet "+(b.rare?"shiny":"");
+  sheet.innerHTML=`
     <button class="closebtn" onclick="closeSheet()">✕</button>
     <div class="grab"></div>
     <div class="hero">
-      <div class="dexbig">N°${String(b.id).padStart(3,'0')} &middot; ${b.region}</div>
-      <div class="bigsprite">${spriteHTML(b,true)}</div>
+      <div class="dexbig">N°${String(b.id).padStart(3,'0')} &middot; ${b.group}</div>
+      <div class="bigsprite">${spriteHTML(b)}</div>
       <h2>${b.fr}</h2>
       <div class="en">${b.en}</div>
-      <div class="sci">${b.sci}</div>
       ${b.rare?'<div class="shinybadge">★ ESPÈCE SHINY</div>':''}
     </div>
     <div class="body">
-      <p class="blurb">${b.blurb}</p>
       <div class="factgrid">
-        <div class="fact"><div class="k">Taille</div><div class="v">${b.size}</div></div>
-        <div class="fact"><div class="k">Habitat</div><div class="v">${b.hab}</div></div>
-        <div class="fact full"><div class="k">Où le chercher</div><div class="v">${b.seen}</div></div>
-        <div class="fact full"><div class="k">Astuce d'observation</div><div class="v">${b.astuce}</div></div>
+        <div class="fact full"><div class="k">Groupe</div><div class="v">${b.group}</div></div>
+        <div class="fact"><div class="k">Statut régional</div><div class="v">${b.rinfo.label}</div></div>
+        <div class="fact"><div class="k">Mentions</div><div class="v">${b.count}</div></div>
       </div>
     </div>
     <button class="seenbtn ${isSeen?'':'off'}" id="toggleSeen">${isSeen?'✓ Attrapé (toucher pour annuler)':'Marquer comme vu'}</button>`;
-  document.getElementById('toggleSeen').onclick = ()=>{
+  document.getElementById('toggleSeen').onclick=()=>{
     if(seen[b.id]) delete seen[b.id]; else seen[b.id]=true;
     saveSeen(); renderGrid(); openSheet(b);
   };
-  overlay.classList.add('open');
-  document.body.style.overflow='hidden';
+  overlay.classList.add('open'); document.body.style.overflow='hidden';
 }
 function closeSheet(){ overlay.classList.remove('open'); document.body.style.overflow=''; }
-overlay.onclick = e=>{ if(e.target===overlay) closeSheet(); };
+overlay.onclick=e=>{ if(e.target===overlay) closeSheet(); };
 
-/* ---------- chips ---------- */
-const chipsEl = document.getElementById('chips');
+const chipsEl=document.getElementById('chips');
 function buildChips(){
-  const defs = [["all","Tous"],["common","Communs"],["shiny","★ Shiny"],...REGIONS.map(r=>["region:"+r,r])];
-  chipsEl.innerHTML = defs.map(([v,l])=>{
-    const sh = v==="shiny"?"shiny":"";
+  const defs=[["all","Tous"],["common","Communs"],["shiny","★ Shiny"],...GROUPS.map(g=>["group:"+g,g])];
+  chipsEl.innerHTML=defs.map(([v,l])=>{
+    const sh=v==="shiny"?"shiny":"";
     return `<div class="chip ${sh} ${v===filter?'active':''}" data-v="${v}">${l}</div>`;
   }).join("");
   chipsEl.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{ filter=c.dataset.v; buildChips(); renderGrid(); });
 }
-
 document.getElementById('search').addEventListener('input',e=>{ query=e.target.value.trim(); renderGrid(); });
-document.getElementById('reset').onclick = ()=>{
-  if(confirm("Effacer toutes les observations cochées ?")){ seen={}; saveSeen(); renderGrid(); }
-};
+document.getElementById('reset').onclick=()=>{ if(confirm("Effacer toutes les observations cochées ?")){ seen={}; saveSeen(); renderGrid(); } };
 
-/* ---------- init ---------- */
-(async ()=>{ await loadSeen(); buildChips(); renderGrid(); })();
+(async()=>{ await loadSeen(); buildChips(); renderGrid(); })();
 </script>
 </body>
 </html>
